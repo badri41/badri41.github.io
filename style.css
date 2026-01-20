@@ -97,6 +97,33 @@ body {
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.cp-platforms {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 12px;
+}
+
+.cp-platforms a {
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.cp-platforms a:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.cp-platforms img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .links {
@@ -131,6 +158,12 @@ body {
 
 .link .icon {
   font-size: 18px;
+}
+
+.platform-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 /* Content */
