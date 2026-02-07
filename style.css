@@ -72,31 +72,99 @@ body {
 }
 
 /* Home Page */
-.intro h1 {
+.intro-header {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.photo-container {
+  flex-shrink: 0;
+}
+
+.photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.intro-text h1 {
   font-family: var(--font-mono);
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .intro .tagline {
-  font-size: 17px;
-  color: var(--text);
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.intro .description {
   font-size: 15px;
   color: var(--text-muted);
-  margin-bottom: 32px;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .links {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.icon-links {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.icon-links a {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.icon-links a:hover {
+  opacity: 1;
+}
+
+.icon-links img {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border);
+  padding-top: 32px;
+}
+
+.about h2 {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.about h3 {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.about p {
+  font-size: 15px;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.about strong {
+  font-weight: 600;
 }
 
 .link {
@@ -390,16 +458,32 @@ body {
     font-size: 13px;
   }
 
-  .intro h1 {
+  .intro-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .intro-text h1 {
     font-size: 20px;
   }
 
   .intro .tagline {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .links {
     gap: 16px;
+    justify-content: center;
+  }
+
+  .icon-links {
+    justify-content: center;
+  }
+
+  .photo {
+    width: 100px;
+    height: 100px;
   }
 
   .article-header h1 {
