@@ -10,37 +10,21 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <header class="site-header">
-      <nav class="nav">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="resume.html" class="nav-link">Resume</a>
-        <a href="contact.html" class="nav-link">Contact</a>
-      </nav>
-    </header>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+    <span class="theme-icon"></span>
+  </button>
 
-    <main class="main">
-      <section class="intro">
-        <div class="intro-header">
-          <div class="photo-container">
-            <!-- Replace src with your photo path, e.g., "assets/images/photo.jpg" -->
-            <img src="assets/images/photo.jpg" alt="Badri Bishal Das" class="photo">
-          </div>
-          <div class="intro-text">
-            <h1>Badri Bishal Das</h1>
-            <p class="tagline">Undergraduate at IIT Guwahati interested in systems engineering, optimization, and performance-critical C++.</p>
-            <p class="highlight">Incoming Associate Software Developer Intern @ Google India</p>
-          </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-content">
+        <div class="photo-container">
+          <img src="assets/images/photo.jpg" alt="Badri Bishal Das" class="photo">
         </div>
+        <h1 class="sidebar-name">Badri Bishal Das</h1>
+        <p class="sidebar-tagline">DSAI Undergrad @ IIT Guwahati</p>
+        <p class="sidebar-highlight">Incoming SDE Intern @ Google</p>
 
-        <div class="links">
-          <a href="https://github.com/badri41" class="link" target="_blank">GitHub</a>
-          <a href="https://drive.google.com/file/d/1rK-iioi5mBZ_UGJb5s8rR_fZhgtDjMIJ/view?usp=sharing" class="link" target="_blank">Resume (PDF)</a>
-          <a href="projects.html" class="link">Projects</a>
-        </div>
-
-        <div class="icon-links">
+        <div class="sidebar-icons">
           <a href="https://codeforces.com/profile/badri41" target="_blank" title="Codeforces">
             <img src="assets/images/codeforces.png" alt="Codeforces">
           </a>
@@ -50,55 +34,86 @@
           <a href="https://atcoder.jp/users/badri41" target="_blank" title="AtCoder">
             <img src="assets/images/atcoder.png" alt="AtCoder">
           </a>
-          <a href="https://github.com/badri41" target="_blank" title="GitHub">
-            <img src="assets/images/github.png" alt="GitHub">
-          </a>
-          <a href="https://www.linkedin.com/in/badribishaldas/" target="_blank" title="LinkedIn">
-            <img src="assets/images/linkedin.png" alt="LinkedIn">
-          </a>
-          <a href="mailto:d.badri@iitg.ac.in" title="Email">
-            <img src="assets/images/email.png" alt="Email">
-          </a>
         </div>
-      </section>
 
-      <section class="currently-working">
-        <h2>Currently Working On</h2>
-        <ul class="working-list">
-          <li><a href="_posts/threadsafe-queue.html">ThreadSafeQueueLib</a> — Lock-free MPMC queue in C++</li>
-          <li><a href="_posts/dbms-from-scratch.html">DBMS from Scratch</a> — Building a database engine in C++</li>
-        </ul>
-      </section>
+        <nav class="sidebar-links">
+          <a href="https://github.com/badri41" target="_blank">
+            <img src="assets/images/github.png" alt="GitHub"> GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/badribishaldas/" target="_blank">
+            <img src="assets/images/linkedin.png" alt="LinkedIn"> LinkedIn
+          </a>
+          <a href="mailto:d.badri@iitg.ac.in">
+            <img src="assets/images/email.png" alt="Email"> Email
+          </a>
+          <a href="https://drive.google.com/file/d/1rK-iioi5mBZ_UGJb5s8rR_fZhgtDjMIJ/view?usp=sharing" target="_blank">
+            <img src="assets/images/resume.png" alt="Resume"> Resume
+          </a>
+        </nav>
+      </div>
+    </aside>
 
-      <section class="blogs">
-        <h2>Blogs</h2>
-        <ul class="blog-list">
-          <li><a href="_posts/threadsafe-queue.html">ThreadSafeQueueLib: Lock-Free MPMC Queue in C++</a> <span class="status">In Progress</span></li>
-          <li><a href="_posts/route-optimization.html">Route Optimization: HVRPSTW Solver</a></li>
-          <li><a href="_posts/dbms-from-scratch.html">DBMS from Scratch in C++</a> <span class="status">Coming Soon</span></li>
-        </ul>
-      </section>
+    <div class="main-wrapper">
+      <header class="site-header">
+        <nav class="nav">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="projects.html" class="nav-link">Projects</a>
+          <a href="resume.html" class="nav-link">Resume</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+      </header>
 
-      <section class="about">
-        <h2>About</h2>
-        <p>Hii! I am Badri Bishal Das, a Data Science and Artificial Intelligence Undergrad at Indian Institute of Technology Guwahati. I am interested in low latency C++ development, algorithms, and performance-critical programming. I am open to any opportunity for Winter 2026 & Summer 2027. Feel free to approach me through the emails given.</p>
+      <main class="main main-centered">
+        <section class="currently-working">
+          <h2>Currently Working On</h2>
+          <ul class="working-list">
+            <li><a href="_posts/threadsafe-queue.html">ThreadSafeQueueLib</a> — Lock-free MPMC queue in C++</li>
+            <li><a href="_posts/dbms-from-scratch.html">DBMS from Scratch</a> — Building a database engine in C++</li>
+          </ul>
+        </section>
 
-        <h3>Technical Interests</h3>
+        <section class="blogs">
+          <h2>Blogs</h2>
+          <ul class="blog-list">
+            <li><a href="_posts/threadsafe-queue.html">ThreadSafeQueueLib: Lock-Free MPMC Queue in C++</a> <span class="status">In Progress</span></li>
+            <li><a href="_posts/dbms-from-scratch.html">DBMS from Scratch in C++</a> <span class="status">Coming Soon</span></li>
+          </ul>
+        </section>
 
-        <p><strong>Systems & Low-Level Engineering:</strong> I enjoy understanding how software actually works beneath the various abstractions. This includes memory models, threading, synchronization, cache behavior, and how these influence real-world performance. I have a strong interest in modern C++, and how to leverage the various features it offers for efficient and predictable code.</p>
+        <section class="about">
+          <h2>About</h2>
+          <p>Hii! I am Badri Bishal Das, a Data Science and Artificial Intelligence Undergrad at Indian Institute of Technology Guwahati. I am interested in low latency C++ development, algorithms, and performance-critical programming. I am open to any opportunity for Winter 2026 & Summer 2027. Feel free to approach me through the emails given.</p>
 
-        <p><strong>Competitive Programming:</strong> I like Competitive Programming because it challenges me to think quickly and solve complex problems under time constraints. It helps me improve my algorithmic thinking and coding skills, also I really like the feeling after solving a tough problem by myself.</p>
+          <h3>Technical Interests</h3>
 
-        <p><strong>Problem Solving & Mathematics:</strong> I like solving all kinds of mathematical problems, especially non-routine ones involving combinatorics, probability, and quantitative reasoning. I enjoy working through puzzles that requires various insights and observations.</p>
+          <p><strong>Systems & Low-Level Engineering:</strong> I enjoy understanding how software actually works beneath the various abstractions. This includes memory models, threading, synchronization, cache behavior, and how these influence real-world performance. I have a strong interest in modern C++, and how to leverage the various features it offers for efficient and predictable code.</p>
 
-        <h3>Non-Technical Interests</h3>
-        <p>Outside academics, I enjoy staying physically active. I regularly play badminton, go running, and follow fitness as a way to stay disciplined. I also enjoy travelling and trekking when I get the chance.</p>
-      </section>
-    </main>
+          <p><strong>Competitive Programming:</strong> I like Competitive Programming because it challenges me to think quickly and solve complex problems under time constraints. It helps me improve my algorithmic thinking and coding skills, also I really like the feeling after solving a tough problem by myself.</p>
 
-    <footer class="site-footer">
-      <p>Badri Bishal Das</p>
-    </footer>
+          <p><strong>Problem Solving & Mathematics:</strong> I like solving all kinds of mathematical problems, especially non-routine ones involving combinatorics, probability, and quantitative reasoning. I enjoy working through puzzles that requires various insights and observations.</p>
+
+          <h3>Non-Technical Interests</h3>
+          <p>Outside academics, I enjoy staying physically active. I regularly play badminton, go running, and follow fitness as a way to stay disciplined. I also enjoy travelling and trekking when I get the chance.</p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Badri Bishal Das</p>
+      </footer>
+    </div>
   </div>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle('dark');
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    }
+
+    // Load saved theme
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+    }
+  </script>
 </body>
 </html>
