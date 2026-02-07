@@ -167,6 +167,117 @@ body {
   font-weight: 600;
 }
 
+/* Highlight text (Google internship) */
+.highlight {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* Currently Working On Section */
+.currently-working {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-bottom: 32px;
+}
+
+.currently-working h2 {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.working-list {
+  list-style: none;
+  padding: 0;
+}
+
+.working-list li {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.working-list a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.working-list a:hover {
+  text-decoration: underline;
+}
+
+/* Blogs Section */
+.blogs {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  margin-bottom: 32px;
+}
+
+.blogs h2 {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-list li {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.blog-list a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.blog-list a:hover {
+  text-decoration: underline;
+}
+
+/* Status Badge */
+.status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  margin-left: 8px;
+  font-weight: 500;
+}
+
+/* Coming Soon */
+.coming-soon {
+  background: var(--code-bg);
+  padding: 24px;
+  border-radius: 4px;
+  margin-top: 24px;
+}
+
+.coming-soon h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.coming-soon p {
+  color: var(--text-muted);
+}
+
+.coming-soon ul {
+  color: var(--text-muted);
+}
+
 .link {
   font-family: var(--font-mono);
   font-size: 14px;
