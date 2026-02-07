@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Route Optimization Challenge | Badri Bishal Das</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <nav class="nav">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="../projects.html" class="nav-link">Projects</a>
+        <a href="../resume.html" class="nav-link">Resume</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <article class="article">
+        <header class="article-header">
+          <a href="../projects.html" class="back-link">&larr; Projects</a>
+          <h1>Route Optimization: HVRPSTW Solver</h1>
+          <p class="article-meta">C++17 / Combinatorial Optimization / Metaheuristics</p>
+        </header>
+
+        <div class="article-content">
+          <h2>Motivation</h2>
+          <p>The Kriti '26 optimization challenge presented a real-world vehicle routing problem: assigning employee transportation requests to a heterogeneous fleet while minimizing cost and respecting time constraints. This is the Heterogeneous Vehicle Routing Problem with Soft Time Windows (HVRPSTW)—an NP-hard combinatorial optimization problem with direct applications in logistics and fleet management.</p>
+          <p>I was drawn to this problem because it sits at the intersection of algorithmic theory and practical systems engineering. The challenge isn't just finding a good solution—it's finding one fast enough to be operationally useful, with sub-second compute times for real deployment scenarios.</p>
+
+          <h2>Problem Definition</h2>
+          <p>Given a set of employee pickup requests and a heterogeneous fleet of vehicles, find an assignment of employees to vehicles and a routing sequence that minimizes:</p>
+          <pre><code>Z = w_c * CTC + w_t * TotalTime + Penalties</code></pre>
+          <p>Where CTC is the total operating cost (distance-based), TotalTime is the aggregate route duration, and Penalties capture soft constraint violations.</p>
+
+          <h3>Hard constraints (never violated):</h3>
+          <ul>
+            <li>Vehicle capacity: load never exceeds capacity at any point</li>
+            <li>Pickup-dropoff precedence: pickup must occur before dropoff in the same route</li>
+            <li>Assignment uniqueness: each employee served by exactly one vehicle</li>
+            <li>Earliest pickup time: cannot pick up before the employee's available time</li>
+          </ul>
+
+          <h3>Soft constraints (penalized):</h3>
+          <ul>
+            <li>Late arrival beyond priority-based tolerance windows</li>
+            <li>Vehicle preference mismatches</li>
+            <li>Sharing limit violations</li>
+          </ul>
+
+          <p>The difficulty compounds from multiple sources: the solution space grows as O(n! * m^n) for n requests and m vehicles, time feasibility and capacity constraints interact non-linearly, and the penalty structure creates a rugged optimization landscape with many local minima.</p>
+
+          <h2>Design Decisions</h2>
+
+          <h3>Why metaheuristics instead of exact methods?</h3>
+          <p>Exact methods (branch-and-cut, column generation) provide optimality guarantees but suffer exponential time complexity. For instances with 100+ requests and complex side constraints, they become computationally intractable. The competition required solutions within seconds, not hours.</p>
+          <p>I chose metaheuristics because they trade optimality proofs for practical performance—finding near-optimal solutions quickly. The real-world value of a 95%-optimal solution in 100ms exceeds that of a provably optimal solution in 10 minutes.</p>
+
+          <h3>Why greedy insertion + simulated annealing?</h3>
+          <p>I considered several approaches:</p>
+          <ul>
+            <li><strong>Genetic algorithms:</strong> Powerful for global exploration, but standard crossover operators destroy route feasibility in constrained problems. Implementing repair mechanisms adds complexity.</li>
+            <li><strong>Tabu search:</strong> Effective but requires careful tuning of memory structures and aspiration criteria.</li>
+            <li><strong>ALNS (Adaptive Large Neighborhood Search):</strong> State-of-the-art for VRP variants, but implementing a diverse library of destroy/repair operators is resource-intensive.</li>
+          </ul>
+          <p>I chose Solomon-style insertion for construction because it explicitly checks feasibility at every step, producing valid starting solutions. Simulated annealing for refinement because it's lightweight, escapes local minima through probabilistic acceptance, and converges reliably with straightforward parameter tuning.</p>
+
+          <h3>Two-phase architecture</h3>
+          <p><strong>Phase 1 (Construction):</strong> Multi-start greedy insertion. Requests are sorted by priority and time urgency. Across multiple restarts, the order is perturbed to diversify initial solutions. For each request, I evaluate all feasible insertion positions across all vehicles and select the one minimizing the incremental cost.</p>
+          <p><strong>Phase 2 (Improvement):</strong> Simulated annealing with three neighborhood operators—relocate (move a request within/between routes), exchange (swap two requests between routes), and 2-opt (reverse a segment with precedence checking). The Metropolis acceptance criterion allows uphill moves early in the search, with probability decreasing as temperature cools.</p>
+
+          <h3>Penalty structure design</h3>
+          <p>Time window violations use a two-tier penalty: no penalty within a priority-based tolerance window, then a severe multiplier (M=1000) for violations beyond tolerance. This creates a clear distinction between acceptable delays and constraint violations, guiding the search toward feasible regions while allowing temporary infeasibility during exploration.</p>
+
+          <h2>Core Technical Challenges</h2>
+
+          <h3>Pickup-dropoff precedence in 2-opt</h3>
+          <p>Standard 2-opt reverses a segment of a route. In pickup-and-delivery problems, this can place a dropoff before its corresponding pickup, violating a hard constraint. My initial implementation didn't check for this, producing invalid solutions that passed basic feasibility tests but failed on edge cases.</p>
+          <p>The fix was a fast precedence validation before accepting any 2-opt move: track which requests have been picked up, reject any reversal that would place a dropoff before its pickup.</p>
+
+          <h3>Physically impossible time windows</h3>
+          <p>Test case 4 included Employee E10: 25km from the office with a 30-minute time window. Given vehicle speeds, this was physically impossible to satisfy. The solver initially thrashed, trying to minimize an unavoidable large penalty.</p>
+          <p>I implemented three-tier insertion: strict (must satisfy all constraints), relaxed (allow soft constraint violations), and forced (assign to any feasible vehicle with large penalty). Impossible requests are flagged as "LATE" in the output rather than causing solver instability.</p>
+
+          <h3>Penalty dominance in SA</h3>
+          <p>Large penalties (50K-100K) create a rugged energy landscape. Small neighborhood moves rarely improve solutions enough to escape penalty-dominated regions. The SA would get stuck in local minima.</p>
+          <p>I addressed this with high initial temperature (T0=1000), slow geometric cooling (alpha=0.995), and 10 multi-start restarts. The combination allows aggressive exploration early, with diverse starting points reducing dependence on any single trajectory.</p>
+
+          <h3>Distance calculation reliability</h3>
+          <p>The solver initially called an external maps API for road distances. API latency (>100ms per call) and rate limits made this impractical for real-time optimization. I implemented a circuit breaker: 100ms timeout per call, permanent fallback to Haversine distance * 1.4 (empirical road distance factor) on first failure.</p>
+          <p>This sacrifices accuracy for reliability—a necessary tradeoff when solver runtime matters more than perfect distance estimates.</p>
+
+          <h2>Results & Evaluation</h2>
+          <p>Across four test cases (8-15 requests, 2-4 vehicles):</p>
+          <ul>
+            <li><strong>Cost savings:</strong> 54.5% - 77.0% compared to individual ride baselines</li>
+            <li><strong>Runtime:</strong> 85-180ms (sub-second for all test cases)</li>
+            <li><strong>Coverage:</strong> 100% of employees assigned (including forced assignments for impossible windows)</li>
+          </ul>
+          <p>The solver handles capacity constraints correctly, maintains pickup-dropoff precedence, and produces human-readable route schedules. Test case 4's lower savings (54.5%) reflects the penalty cost of the physically infeasible request.</p>
+          <p>Limitations: the current implementation doesn't scale well beyond ~200 requests (SA iterations become expensive). Memory reclamation for route copies during neighborhood exploration could be optimized. The penalty weights (w_c=0.7, w_t=0.3) were tuned manually; adaptive weighting might improve robustness.</p>
+
+          <h2>What I Learned</h2>
+          <p>Metaheuristic design is less about the algorithm and more about the problem structure. Understanding which constraints are tight (capacity, precedence) versus loose (time windows with tolerance) determines where to focus optimization effort. The SA parameters matter less than getting the neighborhood operators right—a fast, precedence-aware 2-opt is worth more than a sophisticated cooling schedule.</p>
+          <p>If I were to extend this project, I would implement ALNS with a small set of carefully chosen destroy operators (worst removal, related removal) and compare solution quality against the current SA approach. I would also explore constraint programming for the feasibility checking component, potentially hybridizing with metaheuristic search.</p>
+        </div>
+
+        <footer class="article-footer">
+          <h2>Links</h2>
+          <a href="https://github.com/badri41/velora-mobility-optimizer" target="_blank">GitHub Repository</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Badri Bishal Das</p>
+    </footer>
+  </div>
+</body>
+</html>

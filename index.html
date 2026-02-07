@@ -1,111 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Badri Bishal Das</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="dark" id="top">
-  <button class="theme-toggle" aria-label="Toggle theme">
-    <span class="toggle-icon">◐</span>
-  </button>
+<body>
   <div class="container">
-    <aside class="sidebar">
-      <div class="profile">
-        <div class="photo-placeholder">
-          <span>BD</span>
-        </div>
-        <h1 class="name">Badri Bishal Das</h1>
-        <p class="tagline">DSAI Undergrad, IIT Guwahati</p>
-        
-        <div class="cp-platforms">
-          <a href="https://codeforces.com/profile/badri41" target="_blank" title="Codeforces - badri41">
-            <img src="assets/images/codeforces.png" alt="Codeforces">
-          </a>
-          <a href="https://www.codechef.com/users/badri41" target="_blank" title="CodeChef - badri41">
-            <img src="assets/images/codechef.png" alt="CodeChef">
-          </a>
-          <a href="https://atcoder.jp/users/badri41" target="_blank" title="AtCoder - badri41">
-            <img src="assets/images/atcoder.png" alt="AtCoder">
-          </a>
-        </div>
-      </div>
-      
-      <nav class="links">
-        <div class="link-item">
-          <img src="assets/images/location.png" alt="Location" class="platform-icon">
-          <span>Guwahati, India</span>
-        </div>
-        <a href="https://drive.google.com/file/d/1rK-iioi5mBZ_UGJb5s8rR_fZhgtDjMIJ/view?usp=sharing" class="link" target="_blank">
-          <img src="assets/images/resume.png" alt="Resume" class="platform-icon">
-          <span>Resume</span>
-        </a>
-        <a href="https://github.com/badri41" class="link" target="_blank">
-          <img src="assets/images/github.png" alt="GitHub" class="platform-icon">
-          <span>GitHub</span>
-        </a>
-        <a href="https://www.linkedin.com/in/badribishaldas/" class="link" target="_blank">
-          <img src="assets/images/linkedin.png" alt="LinkedIn" class="platform-icon">
-          <span>LinkedIn</span>
-        </a>
-        <a href="mailto:badribishaldas3000@gmail.com" class="link">
-          <img src="assets/images/email.png" alt="Email" class="platform-icon">
-          <span>Personal Email</span>
-        </a>
-        <a href="mailto:d.badri@iitg.ac.in" class="link">
-          <img src="assets/images/email.png" alt="Email" class="platform-icon">
-          <span>Institute Email</span>
-        </a>
+    <header class="site-header">
+      <nav class="nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
-    </aside>
+    </header>
 
-    <main class="content">
-      <section class="about">
-        <p>Hi! I am <strong>Badri Bishal Das</strong>, a Data Science and Artificial Intelligence Undergraduate at Indian Institute of Technology Guwahati (IIT Guwahati), Guwahati, India. I'm primarily interested in systems and low-level engineering, algorithms, and mathematical problem solving. I am open to any opportunity for Winter 2025 & Summer 2026. Feel free to approach me through the email given.</p>
-        
-        <h3>Interests & Focus Areas</h3>
-        
-        <h4>Systems, Performance & Low-Level Engineering</h4>
-        <p>I am deeply interested in understanding how software actually works beneath the abstractions. This includes computer architecture, operating systems, and low-level performance behavior. I enjoy exploring topics like memory models, threading, race conditions, synchronization, cache behavior, and scheduling, and how these influence real-world system performance.</p>
-        
-        <p>I have a strong interest in modern C++, particularly areas such as template metaprogramming, compile-time techniques, performance-oriented design, and writing predictable, efficient code. I like studying how compilers transform code and how small implementation choices can have significant performance implications.</p>
-        
-        <h4>Algorithms</h4>
-        <p>I am strongly drawn to algorithmic thinking and mathematical problem solving. I enjoy working on topics such as algorithms and data structures, game theory and strategic reasoning, advanced dynamic programming patterns, invariants and constructive techniques.</p>
-        
-        <p>My specific interests include:</p>
-        <ul>
-          <li><strong>Probability and Counting Puzzles:</strong> Problems involving combinatorics, probability theory, and quantitative reasoning that require deep insight rather than formulaic approaches.</li>
-          <li><strong>Competitive Programming:</strong> I find competitive programming especially appealing because it sits at the intersection of theory, implementation, and performance under constraints.</li>
-        </ul>
-        
-        <h3>Outside of Tech</h3>
-        <p>Outside academics, I enjoy staying physically active. I regularly play badminton, go running, and follow fitness as a way to stay disciplined and mentally sharp. I also enjoy listening to music and exploring new ideas across domains.</p>
-      </section>
+    <main class="main">
+      <section class="intro">
+        <h1>Badri Bishal Das</h1>
+        <p class="tagline">Undergraduate at IIT Guwahati interested in systems engineering, optimization, and performance-critical C++.</p>
 
-      <section class="posts" id="posts">
-        <h2>Recent Posts</h2>
-        <article class="post">
-          <h3><a href="_posts/cnn-from-scratch.html">Designing a CNN from first principles</a></h3>
-          <p class="post-meta">5 minute read</p>
-          <p>Walking through convolutions, backpropagation, and training stability without deep learning frameworks.</p>
-        </article>
+        <p class="description">I enjoy working at the intersection of algorithms and systems — understanding how theoretical ideas translate into performance, correctness, and scalability on real machines.</p>
+
+        <div class="links">
+          <a href="https://github.com/badri41" class="link" target="_blank">GitHub</a>
+          <a href="https://drive.google.com/file/d/1rK-iioi5mBZ_UGJb5s8rR_fZhgtDjMIJ/view?usp=sharing" class="link" target="_blank">Resume (PDF)</a>
+          <a href="projects.html" class="link">Projects</a>
+        </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <p>Badri Bishal Das</p>
+    </footer>
   </div>
-  <footer class="site-footer">
-    <div class="footer-content">
-      <p class="footer-name">Badri Bishal Das</p>
-      <nav class="footer-nav">
-        <a href="#top">Home</a>
-        <a href="#posts">Posts</a>
-      </nav>
-    </div>
-  </footer>
-  <script src="script.js"></script>
 </body>
 </html>
